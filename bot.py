@@ -3,7 +3,9 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 from config import BOT_OWNERS
+from keep_alive import keep_alive
 
+keep_alive()
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
