@@ -60,7 +60,7 @@ async def yes_callback(interaction: discord.Interaction, bot: commands.Bot, send
     embed.add_field(name="Receiving:", value=receiving, inline=True)
 
     close_button = CloseButton(label="Close", style=discord.ButtonStyle.danger, emoji="🔒", channel=channel, bot=bot)
-    view = View()
+    view = View(timeout=None)
     view.add_item(close_button)
 
     await channel.send(embed=embed, view=view)
@@ -71,7 +71,7 @@ async def no_callback(interaction: discord.Interaction):
 
 class ConfirmView(View):
     def __init__(self, bot: commands.Bot, sending: str, receiving: str):
-        super().__init__()
+        super().__init__(timeout=None)
         self.add_item(ConfirmButton(label="Continue", style=discord.ButtonStyle.success, emoji="<:Yes:1263193152995459123>", callback=lambda i: yes_callback(i, bot, sending, receiving)))
         self.add_item(ConfirmButton(label="Cancel", style=discord.ButtonStyle.danger, emoji="❌", callback=no_callback))
 
@@ -151,7 +151,7 @@ class AmountModal(Modal):
 
         if self.sending_option == "Crypto":
             select = CryptoTypeSelect(self.bot, sending, receiving)
-            view = View()
+            view = View(timeout=None)
             view.add_item(select)
             await interaction.response.edit_message(embed=None, view=view)
         else:
@@ -235,7 +235,7 @@ class ExchangeSelect(Select):
             color=0xc70000
         )
         select = ReceivingSelect(self.bot, sending_option=selected_option)
-        view = View()
+        view = View(timeout=None)
         view.add_item(select)
         await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
 
@@ -255,7 +255,7 @@ class Exchange(commands.Cog):
                 "You can request an exchange by selecting the appropriate option below for the payment type you'll be sending with. "
                 "Follow the instructions and fill out the fields as requested.\n\n"
                 "- **Reminder**\n\n"
-                "Please read our <#1263204206861488229> before creating an Exchange.\n\n"
+                "Please read our <#1262615317390037055> before creating an Exchange.\n\n"
                 "- **Minimum Fees**\n\n"
                 "Unlike other exchangers, we have no minimum fee, but exchanges under $30 may be subject to doubled fees to maintain the integrity of our server."
             ),
@@ -263,7 +263,7 @@ class Exchange(commands.Cog):
         )
 
         select = ExchangeSelect(self.bot)
-        view = View()
+        view = View(timeout=None)
         view.add_item(select)
 
         await interaction.channel.send(embed=embed, view=view)
