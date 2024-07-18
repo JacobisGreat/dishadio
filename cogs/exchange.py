@@ -64,7 +64,7 @@ async def yes_callback(interaction: discord.Interaction, bot: commands.Bot, send
     view.add_item(close_button)
 
     await channel.send(embed=embed, view=view)
-    await interaction.response.send_message(f"Your ticket has been created: {channel.mention}", ephemeral=True)
+    await interaction.followup.send(f"Your ticket has been created: {channel.mention}", ephemeral=True)
 
 async def no_callback(interaction: discord.Interaction):
     await interaction.response.edit_message(content="This exchange request has been canceled.", embed=None, view=None)
@@ -255,7 +255,7 @@ class Exchange(commands.Cog):
                 "You can request an exchange by selecting the appropriate option below for the payment type you'll be sending with. "
                 "Follow the instructions and fill out the fields as requested.\n\n"
                 "- **Reminder**\n\n"
-                "Please read our <#1262899675279917066> before creating an Exchange.\n\n"
+                "Please read our <#1263204206861488229> before creating an Exchange.\n\n"
                 "- **Minimum Fees**\n\n"
                 "Unlike other exchangers, we have no minimum fee, but exchanges under $30 may be subject to doubled fees to maintain the integrity of our server."
             ),
@@ -266,8 +266,8 @@ class Exchange(commands.Cog):
         view = View(timeout=None)
         view.add_item(select)
 
-        await interaction.channel.send(embed=embed, view=view)
         await interaction.response.send_message("Exchange request message has been sent.", ephemeral=True)
+        await interaction.channel.send(embed=embed, view=view)
 
 async def setup(bot):
     await bot.add_cog(Exchange(bot))
