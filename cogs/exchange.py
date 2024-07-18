@@ -255,7 +255,7 @@ class Exchange(commands.Cog):
                 "You can request an exchange by selecting the appropriate option below for the payment type you'll be sending with. "
                 "Follow the instructions and fill out the fields as requested.\n\n"
                 "- **Reminder**\n\n"
-                "Please read our <#1262615317390037055> before creating an Exchange.\n\n"
+                "Please read our <#1262899675279917066> before creating an Exchange.\n\n"
                 "- **Minimum Fees**\n\n"
                 "Unlike other exchangers, we have no minimum fee, but exchanges under $30 may be subject to doubled fees to maintain the integrity of our server."
             ),
